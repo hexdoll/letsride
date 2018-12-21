@@ -47,7 +47,6 @@ class LetsRide
 	public static function options_init()
 	{
 		//Google maps API credentials
-		//plugin db version
 	}
 
 	/*
