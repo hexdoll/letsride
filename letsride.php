@@ -28,14 +28,14 @@ class LetsRide
 	public static function activate() {
 		self::db_init();
 		self::options_init();
-		self::cron_start();
+		//self::cron_start(); //TODO: remove temp comment
 	}
 
 	/*
 	 * Deactivate the plugin
 	 */
 	public static function deactivate() {
-		self::cron_stop();
+		//self::cron_stop();  //TODO: remove temp comment
 		self::clear_cache();
 	}
 
@@ -149,14 +149,16 @@ class LetsRide
 	 * Starts the cron to bring in the data
 	 */
 	public static function cron_start() {
-		//TODO: write me
+		if (wp_next_scheduled(self::PREFIX.'update_feeds') === false) {
+			wp_schedule_event(time(), 'hourly', self::PREFIX.'update_feeds' );
+		}
 	}
 
 	/*
 	 * Stops the cron from bringing in the data
 	 */
 	public static function cron_stop() {
-		//TODO: write me
+		wp_clear_scheduled_hook(self::PREFIX.'update_feeds');
 	}
 
 	/*
