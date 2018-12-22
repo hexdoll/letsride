@@ -35,6 +35,7 @@ class LetsRide
 	 */
 	public static function deactivate() {
 		self::cron_stop();
+		self::clear_cache();
 	}
 
 	/*
