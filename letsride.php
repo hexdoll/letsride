@@ -76,8 +76,7 @@ class LetsRide
 	/*
 	 * Remove plugin's wp options entries
 	 */
-	public static function options_delete()
-	{
+	public static function options_delete() {
 		//TODO: Write me
 	}
 
