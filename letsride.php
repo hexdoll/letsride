@@ -19,6 +19,7 @@ class LetsRide
 		register_deactivation_hook(__FILE__, [__CLASS__, 'deactivate']);
 		register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
 		add_action('admin_menu', [__CLASS__, 'admin_menu']);
+		add_action('admin_post_'.self::NAME, [__CLASS__,'admin_settings_post']);
 	}
 
 	/*
@@ -65,6 +66,27 @@ class LetsRide
 		}
 
 		include(__DIR__.'/admin/settings.php');
+	}
+
+	/*
+	 * Handles update of information from the settings page
+	 */
+	public static function admin_settings_post() {
+		// see https://wordpress.stackexchange.com/questions/79898/trigger-custom-action-when-setting-button-pressed
+		if (!wp_verify_nonce( $_POST[ self::PREFIX.'nonce' ], self::NAME )) {
+			wp_die('Invalid nonce');
+		}
+		$from = urldecode( $_POST['_wp_http_referer'] );
+
+		if (isset($_POST['update-feeds'])) {
+			self::update_feeds();
+			echo 'Feeds updated'; //TODO: replace with admin notice
+		}
+		if (isset($_POST['clear-cache'])) {
+			self::clear_cache();
+			echo 'Cache cleared'; //TODO: replace with admin notice
+		}
+		//wp_safe_redirect( $from ); //TODO: comment me in when finished debugging
 	}
 
 	/*
