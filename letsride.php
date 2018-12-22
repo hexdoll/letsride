@@ -149,6 +149,34 @@ class LetsRide
 			"http://api.letsride.co.uk/public/v1/rides",
 		);
 	}
+
+	/*
+	 * This function is triggered by wp cron to update the data feeds
+	 */
+	public static function update_feeds() {
+		foreach (self::active_feed_urls() as $feed) {
+			self::update_feed($feed);
+		}
+	}
+
+	/*
+	 * Separated in case the plugin needs the functionality to update a single feed
+	 * @return true on success or an array of errors
+	 */
+	public static function update_feed($url) {
+		$errors = array(); //TODO: log these somewhere
+
+		// https://codex.wordpress.org/Function_Reference/wp_remote_get
+		$response = wp_remote_get(esc_url_raw($url));
+		if ( $code == 200 ) {
+			//TODO: Deal with it
+		} else {
+			$errors[] = 'Could not fetch feed ';
+		}
+		//did we get something or an error
+		//did we get something that makes sense
+		return true;
+	}
 }
 
 LetsRide::register();
