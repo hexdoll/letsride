@@ -143,6 +143,7 @@ class LetsRide
 		global $wpdb;
 		$table = $wpdb->prefix.self::TABLE;
 		$wpdb->query("DELETE FROM $table;");
+		update_option(self::PREFIX.'last_updated', array());
 	}
 
 	/*
