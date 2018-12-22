@@ -120,16 +120,14 @@ class LetsRide
 	/*
 	 * Starts the cron to bring in the data
 	 */
-	public static function cron_start()
-	{
+	public static function cron_start() {
 		//TODO: write me
 	}
 
 	/*
 	 * Stops the cron from bringing in the data
 	 */
-	public static function cron_stop()
-	{
+	public static function cron_stop() {
 		//TODO: write me
 	}
 
