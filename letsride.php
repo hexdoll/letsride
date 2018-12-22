@@ -10,6 +10,7 @@ Author URI: http://gemmapeter.co.uk/
 class LetsRide
 {
 	const DB_VERSION = '0.1';
+	const NAME = 'letsride';
 	const TABLE = 'letsride';
 	const PREFIX = 'letsride_'; //for preventing namespace collisions
 
@@ -49,10 +50,10 @@ class LetsRide
 	 */
 	public static function admin_menu() {
 		add_menu_page(
-			"Let's Ride",
-			"Let's Ride",
+			get_plugin_data(__FILE__)['Name'], //page title
+			get_plugin_data(__FILE__)['Name'], //menu title
 			'manage_options', //see https://codex.wordpress.org/Roles_and_Capabilities
-			'letsride',
+			self::NAME,
 			[__CLASS__, 'admin_settings_page']
 		);
 	}
