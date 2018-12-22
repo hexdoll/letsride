@@ -71,14 +71,18 @@ class LetsRide
 	 */
 	public static function options_init()
 	{
-		//Google maps API credentials
+		// see https://codex.wordpress.org/Function_Reference/add_option
+		add_option(self::PREFIX.'last_updated', array(), '', false);
+		add_option(self::PREFIX.'maps_api', '', '', true);
 	}
 
 	/*
 	 * Remove plugin's wp options entries
 	 */
 	public static function options_delete() {
-		//TODO: Write me
+		// see https://codex.wordpress.org/Function_Reference/delete_option
+		delete_option(self::PREFIX.'last_updated');
+		delete_option(self::PREFIX.'maps_api');
 	}
 
 	/*
