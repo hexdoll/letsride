@@ -11,10 +11,9 @@ class LetsRide
 {
 	const DB_VERSION = '0.1';
 	const TABLE = 'letsride';
-	const PREFIX = 'letsride_';
+	const PREFIX = 'letsride_'; //for preventing namespace collisions
 
 	public static function register() {
-
 		register_activation_hook(__FILE__, [__CLASS__, 'activate']);
 		register_deactivation_hook(__FILE__, [__CLASS__, 'deactivate']);
 		register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
@@ -37,6 +36,9 @@ class LetsRide
 		self::cron_stop();
 	}
 
+	/*
+	 * Uninstall the plugin
+	 */
 	public static function uninstall() {
 		self::db_delete();
 		self::options_delete();
@@ -80,8 +82,7 @@ class LetsRide
 	/*
 	 * Initialise the db table for storage of feed data
 	 */
-	public static function db_init()
-	{
+	public static function db_init() {
 		// https://codex.wordpress.org/Creating_Tables_with_Plugins
 		global $wpdb;
 		$table = $wpdb->prefix.self::TABLE;
@@ -108,8 +109,7 @@ class LetsRide
 	/*
 	 * Cleanly removes table from database
 	 */
-	public static function db_delete()
-	{
+	public static function db_delete() {
 		global $wpdb;
 		$table = $wp_db->prefix.self::TABLE;
 		$wpdb->query("DROP TABLE IF EXISTS $table;");
@@ -125,7 +125,7 @@ class LetsRide
 	}
 
 	/*
-	 * Stops the cron to bring in the data
+	 * Stops the cron from bringing in the data
 	 */
 	public static function cron_stop()
 	{
@@ -133,11 +133,10 @@ class LetsRide
 	}
 
 	/*
-	 * Returns the places to load data from
+	 * Returns the places to load data from every time update feeds is run
 	 * @return array of feeds
 	 */
-	public static function active_feed_urls()
-	{
+	public static function active_feed_urls() {
 		return array(
 			"http://api.letsride.co.uk/public/v1/rides",
 		);
