@@ -132,6 +132,15 @@ class LetsRide
 	}
 
 	/*
+	 * Empties the database table
+	 */
+	public static function clear_cache() {
+		global $wpdb;
+		$table = $wpdb->prefix.self::TABLE;
+		$wpdb->query("DELETE FROM $table;");
+	}
+
+	/*
 	 * Returns the places to load data from every time update feeds is run
 	 * @return array of feeds
 	 */
