@@ -18,6 +18,7 @@ class LetsRide
 		register_activation_hook(__FILE__, [__CLASS__, 'activate']);
 		register_deactivation_hook(__FILE__, [__CLASS__, 'deactivate']);
 		register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
+		add_action('admin_menu', [__CLASS__, 'admin_menu']);
 	}
 
 	/*
@@ -39,6 +40,25 @@ class LetsRide
 	public static function uninstall() {
 		self::db_delete();
 		self::options_delete();
+	}
+
+	/*
+	 * Sets up the menus for the plugin in the admin area
+	 */
+	public static function admin_menu() {
+		add_menu_page(
+			"Let's Ride",
+			"Let's Ride",
+			'manage_options', //see https://codex.wordpress.org/Roles_and_Capabilities
+			'letsride',
+			[__CLASS__, 'admin_settings_page']
+		);
+	}
+
+	public static function admin_settings_page() {
+		echo "<h1>Let's Ride</h1>";
+
+		//include(__DIR__.'admin/settings.php');
 	}
 
 	/*
