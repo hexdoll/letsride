@@ -58,9 +58,11 @@ class LetsRide
 	}
 
 	public static function admin_settings_page() {
-		echo "<h1>Let's Ride</h1>";
+		if (!current_user_can('manage_options')) {
+			wp_die('You do not have sufficient permissions to access this page.');
+		}
 
-		//include(__DIR__.'admin/settings.php');
+		include(__DIR__.'/admin/settings.php');
 	}
 
 	/*
