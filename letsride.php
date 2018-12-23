@@ -184,6 +184,7 @@ class LetsRide
 	 * @return array of feeds
 	 */
 	public static function active_feed_urls() {
+		// TODO: de-hardcode me
 		return array(
 			"http://api.letsride.co.uk/public/v1/rides",
 		);
@@ -269,6 +270,7 @@ class LetsRide
 	public static function check_url() {
 		$here = $_SERVER['REQUEST_URI'];
 		// TODO: make this URL a plugin setting
+		// TODO: make this work for wp installs not in the root directory
 		$page = '/'.self::NAME;
 		if ( false !== strpos($here, $page) ) {
 			add_filter('the_posts', [__CLASS__, 'frontend_page']);
