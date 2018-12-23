@@ -10,13 +10,15 @@ if (!defined('WPINC')) {
 				<div class="switchView showMap">
 					<a href="#" title="Show Map">Map</a>
 				</div>
-				<ul class="listItems">
-					<!-- this is grabbed by the js, duplicated and filled with data -->
-					<li class="listItem template">
-						<a class="link" target="_blank" href="#" title="Template Title"><span class="title">Template Title</span></a>
-						<div class="date">Sample date</div>
-					</li>
-				</ul>
+				<div class="listWrapper">
+					<ul class="listItems">
+						<!-- this is grabbed by the js, duplicated and filled with data -->
+						<li class="listItem template">
+							<a class="link" target="_blank" href="#" title="Template Title"><span class="title">Template Title</span></a>
+							<div class="date">Sample date</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="app__mapContainer">
 				<div class="switchView showList">
