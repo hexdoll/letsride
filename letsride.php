@@ -258,6 +258,13 @@ class LetsRide
 		$wpdb->replace( $table, $data );
 	}
 
+	/*
+	 * Helper for plugin scripts that aren't in the root of the plugin dir
+	 */
+	public static function plugins_url($path='') {
+		return plugins_url($path, __FILE__);
+	}
+
 	// see https://wordpress.stackexchange.com/questions/242814/how-to-use-a-frontend-url-with-a-plugin
 	public static function check_url() {
 		$here = $_SERVER['REQUEST_URI'];
