@@ -20,6 +20,7 @@ class LetsRide
 		register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
 		add_action('admin_menu', [__CLASS__, 'admin_menu']);
 		add_action('admin_post_'.self::NAME, [__CLASS__,'admin_settings_post']);
+		add_action( 'init', [__CLASS__, 'check_url']);
 	}
 
 	/*
@@ -255,6 +256,42 @@ class LetsRide
 			'url' => $item['data']['url'],
 		);
 		$wpdb->replace( $table, $data );
+	}
+
+	// see https://wordpress.stackexchange.com/questions/242814/how-to-use-a-frontend-url-with-a-plugin
+	public static function check_url() {
+		$here = $_SERVER['REQUEST_URI'];
+		// TODO: make this URL a plugin setting
+		$page = '/'.self::NAME;
+		if ( false !== strpos($here, $page) ) {
+			add_filter('the_posts', [__CLASS__, 'frontend_page']);
+			add_filter('the_content', [__CLASS__, 'frontend_page_content']);
+		}
+	}
+
+	/*
+	 * Replace all the posts but one, on a page specified in check_url
+	 */
+	public static function frontend_page($posts) {
+		$posts = null;
+		$post = new stdClass();
+		$post->post_content = "Doesn't matter this will be overridden";
+		$post->post_title = "Let's Ride page";
+		$post->post_type = "page";
+		$post->comment_status = "closed";
+		$posts[] = $post;
+		return $posts;
+	}
+
+	/*
+	 * Replace the post content with custom content from the plugin
+	 */
+	// see https://wordpress.stackexchange.com/questions/166449/proper-way-to-replace-the-content-only-for-pages-created-by-custom-plugin
+	public static function frontend_page_content ($content) {
+	ob_start();
+		include(__DIR__.'/public/page.php');
+		$content = ob_get_clean();
+		return $content;
 	}
 }
 
