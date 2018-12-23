@@ -99,7 +99,7 @@ class LetsRide
 		// feeds - an array indexed by feed url, each item contains an array of data about that feed
 		add_option(self::PREFIX.'feeds', array(), '', false);
 		// maps_api - stores the Google Maps API key
-		add_option(self::PREFIX.'maps_api', '', '', true);
+		add_option(self::PREFIX.'maps_api_key', '', '', true);
 	}
 
 	/*
@@ -108,7 +108,7 @@ class LetsRide
 	public static function options_delete() {
 		// see https://codex.wordpress.org/Function_Reference/delete_option
 		delete_option(self::PREFIX.'feeds');
-		delete_option(self::PREFIX.'maps_api');
+		delete_option(self::PREFIX.'maps_api_key');
 	}
 
 	/*
