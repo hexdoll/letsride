@@ -31,14 +31,14 @@ class LetsRide
 	public static function activate() {
 		self::db_init();
 		self::options_init();
-		//self::cron_start(); //TODO: remove temp comment
+		self::cron_start(); // TODO: Fix cron hook
 	}
 
 	/*
 	 * Deactivate the plugin
 	 */
 	public static function deactivate() {
-		//self::cron_stop();  //TODO: remove temp comment
+		self::cron_stop();
 		self::clear_cache();
 	}
 
@@ -93,7 +93,7 @@ class LetsRide
 			update_option(self::PREFIX.'maps_api_key', $_POST['maps-api-key']);
 			wp_safe_redirect( $from );
 		}
-		//wp_safe_redirect( $from ); //TODO: comment me in when finished debugging
+		//wp_safe_redirect( $from ); // TODO: comment me in when finished adding admin notices
 	}
 
 	/*
@@ -213,7 +213,7 @@ class LetsRide
 
 	/*
 	 * Separated in case the plugin needs the functionality to update a single feed
-	 * @return true on success or an array of errors
+	 * @return true on success or false on failure
 	 */
 	public static function update_feed($feed) {
 		//$url = add_query_arg( 'afterTimestamp', $timestamp, $feed );
