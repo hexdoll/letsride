@@ -263,7 +263,7 @@ class LetsRide
 			'description' => (isset($item['data']['description']) ? $item['data']['description'] : ''),
 			'date' => $item['data']['startDate'],
 			'location' => serialize($item['data']['location']),
-			'thumbnail' => (isset($item['programme']['logo']['url']) ? $item['programme']['logo']['url'] : ''),
+			'thumbnail' => (isset($item['data']['programme']['logo']['url']) ? $item['data']['programme']['logo']['url'] : ''),
 			'url' => $item['data']['url'],
 		);
 		$wpdb->replace( $table, $data );
