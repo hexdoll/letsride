@@ -112,6 +112,13 @@ class LetsRide
 	}
 
 	/*
+	 * Helper to get the Google Maps API key
+	 */
+	public static function maps_api_key() {
+		return get_option(self::PREFIX.'maps_api_key');
+	}
+
+	/*
 	 * Initialise the db table for storage of feed data
 	 */
 	public static function db_init() {
