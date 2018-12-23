@@ -22,6 +22,15 @@ jQuery(document).ready(function($){
 		},
 	};
 	$.ajax(letsride_data.ajax_url, settings).success(function(data) {
-		console.log(data);
+		itemList = $('.listItems');
+		itemTemplate = $('.listItem.template');
+		data.forEach(function(item, index) {
+			itemElem = itemTemplate.clone();
+			itemElem.removeClass('template');
+			$('.title', itemElem).text(item.title);
+			$('.date', itemElem).text(item.date);
+			itemList.append(itemElem);
+			// TODO: add a marker to the map
+		});
 	});
 });

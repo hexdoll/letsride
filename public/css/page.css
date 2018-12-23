@@ -47,9 +47,9 @@
 
 .app__listContainer{
     right: 0;
-    background-color: #00F;
     overflow-y: scroll;
     overflow-x: hidden;
+    background: linear-gradient(to right, #3a6186, #89253e);
 }
 
 .app__mapContainer {
@@ -110,4 +110,21 @@
     left: 0;
     background-image: url('../images/map-icon.svg');
     border-radius: 0px 10px 10px 0px;
+}
+
+.listItems {
+    list-style-type: none;
+    padding-left: 15%;
+    padding-right: 10%;
+}
+
+.listItem.template {
+    display: none;
+}
+.listItem {
+    display: block;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+    padding: 10px;
 }
