@@ -20,6 +20,8 @@ class LetsRide
 		register_uninstall_hook(__FILE__, [__CLASS__, 'uninstall']);
 		add_action('admin_menu', [__CLASS__, 'admin_menu']);
 		add_action('admin_post_'.self::NAME, [__CLASS__,'admin_settings_post']);
+		add_action('wp_ajax_'.self::PREFIX.'frontend_ajax', [__CLASS__, 'frontend_ajax']);
+		add_action('wp_ajax_nopriv_'.self::PREFIX.'frontend_ajax', [__CLASS__, 'frontend_ajax']);
 		add_action( 'init', [__CLASS__, 'check_url']);
 	}
 
@@ -312,6 +314,12 @@ class LetsRide
 			add_filter('script_loader_tag', [__CLASS__, 'maps_js_tag'], 10, 3);
 			wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?callback=initMap&key='.self::maps_api_key(), [], '', true);
 			wp_enqueue_script(self::PREFIX.'frontend_js', self::plugins_url('public/js/page.js'), ['jquery','google-maps'], '', true);
+			//allows sending data to the javascript
+			$data = array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'action' => self::PREFIX.'frontend_ajax',
+			);
+			wp_localize_script( self::PREFIX.'frontend_js', self::PREFIX.'data', $data);
 		}
 	}
 
