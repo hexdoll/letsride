@@ -1,0 +1,100 @@
+.app__container {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid black;
+    min-height: 400px;
+}
+
+.app__container.square::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.app__container.full-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+}
+
+.app__viewWrapper {
+    display: block;
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    left: 0;
+    right: auto;
+    transition-property: left;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+}
+
+.app__viewWrapper.showMap {
+    left: -100%;
+}
+
+.app__listContainer,
+.app__mapContainer {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.app__listContainer{
+    left: 0;
+    background-color: #00F;
+    overflow: scroll-y;
+}
+
+.app__mapContainer {
+    right: 0;
+    background-color: #0F0;
+    overflow: hidden;
+}
+
+.switchView {
+    display: block;
+    position: absolute;
+    width: 10%;
+    height: 70px;
+    bottom: 50%;
+    color: #FFF;
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    padding-top: 2em;
+    transform: translateY(50%);
+}
+
+.switchView a {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: transparent;
+    text-decoration: none;
+}
+
+.switchView a:hover {
+    color: transparent;
+}
+
+.switchView.showList {
+    left: 0;
+    background-image: url('../images/list-icon.svg');
+    border-radius: 0px 10px 10px 0px;
+}
+
+.switchView.showMap {
+    right: 0;
+    background-image: url('../images/map-icon.svg');
+    border-radius: 10px 0px 0px 10px;
+}

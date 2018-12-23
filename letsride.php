@@ -273,6 +273,8 @@ class LetsRide
 		if ( false !== strpos($here, $page) ) {
 			add_filter('the_posts', [__CLASS__, 'frontend_page']);
 			add_filter('the_content', [__CLASS__, 'frontend_page_content']);
+			wp_enqueue_style(self::PREFIX.'frontend_stylesheet', self::plugins_url('public/css/page.css'));
+			wp_enqueue_script(self::PREFIX.'frontend_js', self::plugins_url('public/js/page.js'), ['jquery']);
 		}
 	}
 
