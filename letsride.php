@@ -309,7 +309,7 @@ class LetsRide
 	 */
 	// see https://wordpress.stackexchange.com/questions/166449/proper-way-to-replace-the-content-only-for-pages-created-by-custom-plugin
 	public static function frontend_page_content ($content) {
-	ob_start();
+		ob_start();
 		include(__DIR__.'/public/page.php');
 		$content = ob_get_clean();
 		return $content;
