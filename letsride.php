@@ -95,7 +95,7 @@ class LetsRide
 	public static function options_init()
 	{
 		// see https://codex.wordpress.org/Function_Reference/add_option
-		add_option(self::PREFIX.'last_updated', array(), '', false);
+		add_option(self::PREFIX.'feeds', array(), '', false);
 		add_option(self::PREFIX.'maps_api', '', '', true);
 	}
 
@@ -104,7 +104,7 @@ class LetsRide
 	 */
 	public static function options_delete() {
 		// see https://codex.wordpress.org/Function_Reference/delete_option
-		delete_option(self::PREFIX.'last_updated');
+		delete_option(self::PREFIX.'feeds');
 		delete_option(self::PREFIX.'maps_api');
 	}
 
