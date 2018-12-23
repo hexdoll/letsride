@@ -110,7 +110,6 @@ class LetsRide
 	 * Remove plugin's wp options entries
 	 */
 	public static function options_delete() {
-		// see https://codex.wordpress.org/Function_Reference/delete_option
 		delete_option(self::PREFIX.'feeds');
 		delete_option(self::PREFIX.'maps_api_key');
 	}
