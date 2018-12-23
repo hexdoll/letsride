@@ -225,6 +225,10 @@ class LetsRide
 			foreach ( $data['items'] as $item ) {
 				self::feed_item( $feed, $item );
 			}
+			// record that the feed was updated
+			$updated = get_option( self::PREFIX.'feeds' );
+			$updated[$feed]['updated'] = time();
+			update_option(self::PREFIX.'feeds', $updated);
 		}
 		return true;
 	}
