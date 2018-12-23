@@ -270,6 +270,29 @@ class LetsRide
 	}
 
 	/*
+	 * Generates AJAX for our frontend to use
+	 */
+	public static function frontend_ajax() {
+		global $wpdb;
+		$table = $wpdb->prefix.self::TABLE;
+		$query = $wpdb->get_results("SELECT * FROM $table;", ARRAY_A);
+		//process db query output to be suitable for feed
+		$data = array_map(function($a){
+			unset($a['identifier']);
+			unset($a['feed_url']);
+			$location = unserialize($a['location']);
+			$a['location'] = array(
+				'lat' => $location['geo']['latitude'],
+				'lng' => $location['geo']['longitude'],
+			);
+			$a['address'] = $location['address'];
+			return $a;
+		}, $query);
+		wp_send_json($data);
+		wp_die();
+	}
+
+	/*
 	 * Helper for plugin scripts that aren't in the root of the plugin dir
 	 */
 	public static function plugins_url($path='') {
