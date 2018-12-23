@@ -196,19 +196,56 @@ class LetsRide
 	 * Separated in case the plugin needs the functionality to update a single feed
 	 * @return true on success or an array of errors
 	 */
-	public static function update_feed($url) {
-		$errors = array(); //TODO: log these somewhere
+	public static function update_feed($feed) {
+		//$url = add_query_arg( 'afterTimestamp', $timestamp, $feed );
 
 		// https://codex.wordpress.org/Function_Reference/wp_remote_get
-		$response = wp_remote_get(esc_url_raw($url));
-		if ( $code == 200 ) {
-			//TODO: Deal with it
+		$response = wp_remote_get(esc_url_raw($feed));
+		if ( $response instanceof WP_Error ) {
+			print_r( $response );
+			//TODO: log errors
+			return false;
 		} else {
-			$errors[] = 'Could not fetch feed ';
+			$body = wp_remote_retrieve_body( $response );
+			if (!$body) {
+				echo 'No data returned';
+				return false;
+			}
+			$data = json_decode( $body, true );
+			if ( $data == null ) {
+				echo 'Could not understand feed response';
+				return false;
+			}
+			//errors variable may be set in the JSON
+			if (isset( $data['errors'] )) {
+				print_r( $data['errors'] );
+				return false;
+			}
+
+			foreach ( $data['items'] as $item ) {
+				self::feed_item( $feed, $item );
+			}
 		}
-		//did we get something or an error
-		//did we get something that makes sense
 		return true;
+	}
+
+	/*
+	 * Update an individual feed item
+	 */
+	public static function feed_item($feed, $item) {
+		global $wpdb;
+		$table = $wpdb->prefix.self::TABLE;
+		$data = array(
+			'feed_url' => $feed,
+			'identifier' => intval($item['data']['identifier']),
+			'title' => $item['data']['name'],
+			'description' => (isset($item['data']['description']) ? $item['data']['description'] : ''),
+			'date' => $item['data']['startDate'],
+			'location' => serialize($item['data']['location']),
+			'thumbnail' => (isset($item['programme']['logo']['url']) ? $item['programme']['logo']['url'] : ''),
+			'url' => $item['data']['url'],
+		);
+		$wpdb->replace( $table, $data );
 	}
 }
 
