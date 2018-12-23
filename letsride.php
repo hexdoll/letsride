@@ -172,7 +172,10 @@ class LetsRide
 		global $wpdb;
 		$table = $wpdb->prefix.self::TABLE;
 		$wpdb->query("DELETE FROM $table;");
-		update_option(self::PREFIX.'last_updated', array());
+		//remove all the update times for the feeds
+		$updated = get_option(self::PREFIX.'feeds');
+		$updated = array_map(function($a) {unset($a['updated']); return $a;}, $updated);
+		update_option(self::PREFIX.'feeds', $updated);
 	}
 
 	/*
