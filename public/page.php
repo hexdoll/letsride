@@ -16,7 +16,9 @@ if (!defined('WPINC')) {
 				<div class="switchView showList">
 					<a class="show-list" href="#" title="Show List">List</a>
 				</div>
-				Map goes here
+				<div class="mapWrapper">
+					<div id="map"></div>
+				</div>
 			</div>
 		</div>
 	</div>

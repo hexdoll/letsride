@@ -286,8 +286,19 @@ class LetsRide
 			add_filter('the_posts', [__CLASS__, 'frontend_page']);
 			add_filter('the_content', [__CLASS__, 'frontend_page_content']);
 			wp_enqueue_style(self::PREFIX.'frontend_stylesheet', self::plugins_url('public/css/page.css'));
-			wp_enqueue_script(self::PREFIX.'frontend_js', self::plugins_url('public/js/page.js'), ['jquery']);
+			add_filter('script_loader_tag', [__CLASS__, 'maps_js_tag'], 10, 3);
+			wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?callback=initMap&key='.self::maps_api_key(), [], '', true);
+			wp_enqueue_script(self::PREFIX.'frontend_js', self::plugins_url('public/js/page.js'), ['jquery','google-maps'], '', true);
 		}
+	}
+
+	// see https://wordpress.stackexchange.com/questions/236811/how-to-make-google-jquery-library-async-or-defer
+	public static function maps_js_tag($tag, $handle, $src) {
+		if ( 'google-maps' === $handle ) {
+			return str_replace( ' src=', ' async defer src=', $tag );
+		}
+		// Allow all other tags to pass
+		return $tag;
 	}
 
 	/*
