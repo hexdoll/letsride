@@ -9,7 +9,7 @@ Author URI: http://gemmapeter.co.uk/
 
 class LetsRide
 {
-	const DB_VERSION = '0.1';
+	const DB_VERSION = '0.2';
 	const NAME = 'letsride';
 	const TABLE = 'letsride';
 	const PREFIX = 'letsride_'; //for preventing namespace collisions
@@ -120,13 +120,15 @@ class LetsRide
 		$sql = "CREATE TABLE $table (
 			id INTEGER NOT NULL AUTO_INCREMENT,
 			feed_url VARCHAR(255) NOT NULL,
+			identifier INTEGER NOT NULL,
 			title VARCHAR(255),
 			description TEXT,
 			date DATETIME NOT NULL,
 			location TEXT,
 			thumbnail VARCHAR(255),
 			url VARCHAR(255),
-			PRIMARY KEY (id)
+			PRIMARY KEY (id),
+			UNIQUE KEY (feed_url, identifier)
 			) $charset_collate;";
 
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
