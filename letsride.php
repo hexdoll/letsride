@@ -277,7 +277,7 @@ class LetsRide
 	public static function frontend_ajax() {
 		global $wpdb;
 		$table = $wpdb->prefix.self::TABLE;
-		$query = $wpdb->get_results("SELECT * FROM $table;", ARRAY_A);
+		$query = $wpdb->get_results("SELECT * FROM $table LIMIT 10;", ARRAY_A);
 		//process db query output to be suitable for feed
 		$data = array_map(function($a){
 			unset($a['identifier']);
