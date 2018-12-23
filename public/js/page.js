@@ -29,6 +29,8 @@ jQuery(document).ready(function($){
 			itemElem.removeClass('template');
 			$('.title', itemElem).text(item.title);
 			$('.date', itemElem).text(item.date);
+			$('.link', itemElem).attr('href', item.url);
+			$('.link', itemElem).attr('title', item.title);
 			itemList.append(itemElem);
 			// TODO: add a marker to the map
 		});
