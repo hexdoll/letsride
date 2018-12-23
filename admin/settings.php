@@ -5,6 +5,7 @@ if (!defined('WPINC')) {
 $feeds = LetsRide::active_feed_urls();
 $action = LetsRide::NAME;
 $nonce = LetsRide::PREFIX.'nonce';
+$feeds_option = get_option(LetsRide::PREFIX.'feeds');
 ?>
 
 <h1>Let's Ride Settings</h1>
@@ -14,7 +15,14 @@ $nonce = LetsRide::PREFIX.'nonce';
 <?php if ($feeds): ?>
 	<ul>
 	<?php foreach (LetsRide::active_feed_urls() as $feed): ?>
-		<li><?php echo esc_url($feed) ?></li>
+		<li>
+			<?php
+			$feed_data = $feeds_option[$feed];
+			$updated = (isset($feed_data['updated']) ? date_i18n('Y-m-d H:i:s', $feed_data['updated']) : 'never');
+			?>
+			<?php echo esc_url($feed) ?>
+			(last updated: <?php echo $updated; ?>)
+		</li>
 	<?php endforeach; ?>
 	</ul>
 <?php else: ?>
