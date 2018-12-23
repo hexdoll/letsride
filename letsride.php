@@ -94,8 +94,10 @@ class LetsRide
 	 */
 	public static function options_init()
 	{
-		// see https://codex.wordpress.org/Function_Reference/add_option
+		// note that options are prefixed with the module name to prevent namespace collisions
+		// feeds - an array indexed by feed url, each item contains an array of data about that feed
 		add_option(self::PREFIX.'feeds', array(), '', false);
+		// maps_api - stores the Google Maps API key
 		add_option(self::PREFIX.'maps_api', '', '', true);
 	}
 
