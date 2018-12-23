@@ -87,6 +87,10 @@ class LetsRide
 			self::clear_cache();
 			echo 'Cache cleared'; //TODO: replace with admin notice
 		}
+		if (isset($_POST['update-maps-api-key'])) {
+			update_option(self::PREFIX.'maps_api_key', $_POST['maps-api-key']);
+			wp_safe_redirect( $from );
+		}
 		//wp_safe_redirect( $from ); //TODO: comment me in when finished debugging
 	}
 

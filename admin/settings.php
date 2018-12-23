@@ -38,6 +38,12 @@ $redirect = urlencode( $_SERVER['REQUEST_URI'] );
 	<input type="hidden" name="_wp_http_referer" value="<?php echo $redirect; ?>">
 	<input type="hidden" name="action" value="<?php echo $action; ?>" />
 
+	<p>
+	<label for="maps-api-key">Google Maps API Key</label>
+	<input type="text" name="maps-api-key" id="maps-api-key" size="40" value="<?php echo esc_html(LetsRide::maps_api_key()) ?>"/>
+	<?php submit_button('Save', 'primary', 'update-maps-api-key', false); ?>
+	</p>
+
 	<?php submit_button('Update Feeds', 'primary', 'update-feeds', false); ?>
 	<?php submit_button('Clear Cache', 'primary', 'clear-cache', false); ?>
 </form>
