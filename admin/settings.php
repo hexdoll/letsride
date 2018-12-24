@@ -17,7 +17,7 @@ $feeds_option = get_option(LetsRide::PREFIX.'feeds');
 	<?php foreach (LetsRide::active_feed_urls() as $feed): ?>
 		<li>
 			<?php
-			$feed_data = $feeds_option[$feed];
+			$feed_data = (isset($feeds_option[$feed]) ? $feeds_option[$feed] : []);
 			$updated = (isset($feed_data['updated']) ? date_i18n('Y-m-d H:i:s', $feed_data['updated']) : 'never');
 			?>
 			<?php echo esc_url($feed) ?>
