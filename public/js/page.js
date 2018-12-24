@@ -24,6 +24,7 @@ jQuery(document).ready(function($){
 	$.ajax(letsride_data.ajax_url, settings).success(function(data) {
 		itemList = $('.listItems');
 		itemTemplate = $('.listItem.template');
+		popupTemplate = $('.mapPopup.template');
 		data.forEach(function(item, index) {
 			itemElem = itemTemplate.clone();
 			itemElem.removeClass('template');
@@ -32,7 +33,29 @@ jQuery(document).ready(function($){
 			$('.link', itemElem).attr('href', item.url);
 			$('.link', itemElem).attr('title', item.title);
 			itemList.append(itemElem);
-			// TODO: add a marker to the map
+
+			popupElem = popupTemplate.clone();
+			popupElem.removeClass('template');
+			$('.title', popupElem).text(item.title);
+			$('.location', popupElem).text(item.location_name);
+			$('.date', popupElem).text(item.date);
+			$('a.link', popupElem).attr('href', item.url);
+			$('span.link', popupElem).text(item.url);
+			$('.location', popupElem).text(item.place);
+			$('.thumbnail', popupElem).attr('src', item.thumbnail);
+
+			console.log(item.thumbnail);
+			var infowindow = new google.maps.InfoWindow({
+				content: popupElem.html()
+			});
+			var marker = new google.maps.Marker({
+				position: item.location,
+				map: map,
+				title: item.title
+			});
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
 		});
 	});
 });

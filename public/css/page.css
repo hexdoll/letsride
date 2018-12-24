@@ -123,13 +123,20 @@
     padding-right: 10%;
 }
 
+.mapPopup.template,
 .listItem.template {
     display: none;
 }
+
 .listItem {
     display: block;
     border-radius: 10px;
     background-color: rgba(255,255,255,0.5);
     margin-bottom: 10px;
     padding: 10px;
+}
+
+.mapPopup__inner .thumbnail {
+    width: 50%;
+    float: right;
 }

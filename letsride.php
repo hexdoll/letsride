@@ -288,6 +288,7 @@ class LetsRide
 				'lng' => $location['geo']['longitude'],
 			);
 			$a['address'] = $location['address'];
+			$a['place'] = $location['description'];
 			return $a;
 		}, $query);
 		wp_send_json($data);

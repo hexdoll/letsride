@@ -24,6 +24,15 @@ if (!defined('WPINC')) {
 				<div class="switchView showList">
 					<a class="show-list" href="#" title="Show List">List</a>
 				</div>
+				<div class="mapPopup template">
+					<div class="mapPopup__inner">
+						<h2 class="title">Title</h2>
+						<img class="thumbnail" src="#" />
+						<p>Date: <span class="date">Date</span></p>
+						<p>Location: <span class="location">Location</span></p>
+						<p>More information at: <a class="link" target="_blank" href="#"><span class="link"></span></a></p>
+					</div>
+				</div>
 				<div class="mapWrapper">
 					<div id="map"></div>
 				</div>
