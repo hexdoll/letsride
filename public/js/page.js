@@ -29,22 +29,24 @@ jQuery(document).ready(function($){
 			itemElem = itemTemplate.clone();
 			itemElem.removeClass('template');
 			$('.title', itemElem).text(item.title);
+			$('.description', itemElem).text(item.description);
+			$('.location', itemElem).text(item.place);
 			$('.date', itemElem).text(item.date);
 			$('.link', itemElem).attr('href', item.url);
 			$('.link', itemElem).attr('title', item.title);
+			$('.thumbnail', itemElem).attr('src', item.thumbnail);
 			itemList.append(itemElem);
 
 			popupElem = popupTemplate.clone();
 			popupElem.removeClass('template');
 			$('.title', popupElem).text(item.title);
-			$('.location', popupElem).text(item.location_name);
+			$('.location', popupElem).text(item.place);
 			$('.date', popupElem).text(item.date);
 			$('a.link', popupElem).attr('href', item.url);
 			$('span.link', popupElem).text(item.url);
 			$('.location', popupElem).text(item.place);
 			$('.thumbnail', popupElem).attr('src', item.thumbnail);
 
-			console.log(item.thumbnail);
 			var infowindow = new google.maps.InfoWindow({
 				content: popupElem.html()
 			});

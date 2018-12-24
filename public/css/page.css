@@ -136,6 +136,7 @@
     padding: 10px;
 }
 
+.listItem .thumbnail,
 .mapPopup__inner .thumbnail {
     width: 50%;
     float: right;

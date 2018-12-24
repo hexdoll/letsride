@@ -14,8 +14,11 @@ if (!defined('WPINC')) {
 					<ul class="listItems">
 						<!-- this is grabbed by the js, duplicated and filled with data -->
 						<li class="listItem template">
-							<a class="link" target="_blank" href="#" title="Template Title"><span class="title">Template Title</span></a>
-							<div class="date">Sample date</div>
+							<h2><a class="link" target="_blank" href="#" title="Template Title"><span class="title">Template Title</span></a></h2>
+							<img class="thumbnail" src="#" />
+							<p>Location: <span class="location">Location</span><br />
+								Date: <span class="date">Date</span></p>
+							<p class="description">Description</p>
 						</li>
 					</ul>
 				</div>
